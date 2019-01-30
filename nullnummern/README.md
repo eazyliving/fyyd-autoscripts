@@ -9,3 +9,5 @@ https://fyyd.de/user/hoersuppe/curation/nullnummern?page=0
 or
 
 https://fyyd.de/user/hoersuppe/curation/podcast-pilots?page=0
+
+Don't forget to fetch your accesstoken (https://fyyd.de/dev/app). It won't work without!
