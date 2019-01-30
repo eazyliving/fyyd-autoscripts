@@ -4,9 +4,12 @@ This scraper takes your mastodon's timeline and searches for links. It takes the
 
 What you need:
 
-1. An accesstoken for fyyd: Head your browser to https://fyyd.de/dev/app/ and create an app. You get the token there.
+1. A user accesstoken for fyyd
+Head your browser to https://fyyd.de/dev/app/ and create an app. You get the user accesstoken there.
 
-2. An accesstoken for mastodon: Head your browser to https://chaos.social/settings/applications and create an app. You get the token there.
+2. An accesstoken for mastodon
+Head your browser to https://chaos.social/settings/applications and create an app. You get the token there.
 
 
-3. The curation's ID: Create your curation at https://fyyd.de/settings/curations and take the ID from the URL. It's the integer... ;-)
+3. The curation's ID
+Create your curation at https://fyyd.de/settings/curations and take the ID from the URL. It's the integer... ;-)
