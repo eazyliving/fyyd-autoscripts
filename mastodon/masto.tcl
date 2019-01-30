@@ -4,11 +4,22 @@ package require feedparser
 source /opt/auto/tcl-support/json.tcl
 
 set curl "curl -s"
+
+# You need to change those values
+
 set curation_id 0000 
 set accesstoken_fyyd <TAKE_THIS_FROM_YOUR_DEV_PAGE>
 set accesstoken_mastodon <TAKE_THIS_FROM_MASTODONS_DEV_PAGE>
-set url_timeline https://chaos.social/api/v1/timelines/home
+set instance chaos.social
+
+# stop here :)
+
+set url_timeline [format "https://%s/api/v1/timelines/home" $instance]
 set eids {}
+
+
+# Add whatever you think might fit to this blacklist
+# the pattern has to match the link found
 
 set blacklist {
 
@@ -68,9 +79,9 @@ proc findHREFS {parent} {
 while {1} {
 	
 	if {$min_id==0} {
-		set json [eval exec $curl -H \"Authorization: Bearer $accesstoken_mastodon\" $url_timeline]
+		set json [eval exec curl -s -H \"Authorization: Bearer $accesstoken_mastodon\" $url_timeline]
 	} else {
-		set json [eval exec $curl -H \"Authorization: Bearer $accesstoken_mastodon\" [format "%s?min_id=%d" $url_timeline $min_id]]
+		set json [eval exec curl -s -H \"Authorization: Bearer $accesstoken_mastodon\" [format "%s?min_id=%d" $url_timeline $min_id]]
 	}
 	
 	
@@ -97,15 +108,17 @@ while {1} {
 			}
 			
 			foreach link $links {
+
 				if {[inBlacklist $link]} {
 					continue
 				}
 				set eid 0
-				set episodes [::json::parse [eval exec $curl "https://api.fyyd.de/0.2/search/episode?url=$link"] 1]
+				set episodes [::json::parse [eval exec curl -s "https://api.fyyd.de/0.2/search/episode?url=$link"] 1]
 
 				dict for {key episode} [dict get $episodes data] {
 				
 					set eid [dict get $episode id] 
+					
 					break
 				}
 				
